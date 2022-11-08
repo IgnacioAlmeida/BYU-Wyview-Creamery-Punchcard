@@ -44,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 140,
               width: 140,
             ),
-            Text("current total amount spent: ${_currentTotalAmountSpent}"),
+            // Text("current total amount spent: ${_currentTotalAmountSpent}"),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -368,12 +368,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   }));
                 },
                 child: const Text("Punch Card")),
-            ElevatedButton(
-                style: mainButton,
-                onPressed: () {
-                  _resetTotalAmount();
-                },
-                child: const Text("Reset total amount")),
+            // ElevatedButton(
+            //     style: mainButton,
+            //     onPressed: () {
+            //       _resetTotalAmount();
+            //     },
+            //     child: const Text("Reset total amount")),
           ],
         ),
       ),
