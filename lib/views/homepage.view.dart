@@ -42,35 +42,35 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             Image.asset(
               'assets/creamery_logo.svg.png',
-              height: 160,
-              width: 160,
+              height: 140,
+              width: 140,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ValueCircle(
-                  value: Value(value: 1),
+                  value: const Value(value: 1),
                 ),
                 ValueCircle(
-                  value: Value(value: 2),
+                  value: const Value(value: 2),
                 ),
                 ValueCircle(
-                  value: Value(value: 3),
+                  value: const Value(value: 3),
                 ),
                 ValueCircle(
-                  value: Value(value: 4),
+                  value: const Value(value: 4),
                 ),
                 ValueCircle(
-                  value: Value(value: 5),
+                  value: const Value(value: 5),
                 ),
                 ValueCircle(
-                  value: Value(value: 6),
+                  value: const Value(value: 6),
                 ),
                 ValueCircle(
-                  value: Value(value: 7),
+                  value: const Value(value: 7),
                 ),
                 ValueCircle(
-                  value: Value(value: 8),
+                  value: const Value(value: 8),
                 ),
               ],
             ),
@@ -78,82 +78,55 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ValueCircle(
-                  value: Value(value: 9),
+                  value: const Value(value: 9),
                 ),
                 ValueCircle(
-                  value: Value(value: 10),
+                  value: const Value(value: 10),
                 ),
                 ValueCircle(
-                  value: Value(value: 11),
+                  value: const Value(value: 11),
                 ),
                 ValueCircle(
-                  value: Value(value: 12),
+                  value: const Value(value: 12),
                 ),
                 ValueCircle(
-                  value: Value(value: 13),
+                  value: const Value(value: 13),
                 ),
                 ValueCircle(
-                  value: Value(value: 14),
+                  value: const Value(value: 14),
                 ),
                 ValueCircle(
-                  value: Value(value: 15),
+                  value: const Value(value: 15),
                 ),
-                PinkCircle()
+                const PinkCircle()
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ValueCircle(
-                  value: Value(value: 17),
+                  value: const Value(value: 17),
                 ),
                 ValueCircle(
-                  value: Value(value: 18),
+                  value: const Value(value: 18),
                 ),
                 ValueCircle(
-                  value: Value(value: 19),
+                  value: const Value(value: 19),
                 ),
                 ValueCircle(
-                  value: Value(value: 20),
+                  value: const Value(value: 20),
                 ),
                 ValueCircle(
-                  value: Value(value: 21),
+                  value: const Value(value: 21),
                 ),
                 ValueCircle(
-                  value: Value(value: 22),
+                  value: const Value(value: 22),
                 ),
                 ValueCircle(
-                  value: Value(value: 23),
+                  value: const Value(value: 23),
                 ),
                 ValueCircle(
-                  value: Value(value: 24),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ValueCircle(
-                  value: Value(value: 25),
-                ),
-                OrangeCircle(),
-                ValueCircle(
-                  value: Value(value: 27),
-                ),
-                ValueCircle(
-                  value: Value(value: 28),
-                ),
-                ValueCircle(
-                  value: Value(value: 29),
-                ),
-                ValueCircle(
-                  value: Value(value: 30),
-                ),
-                ValueCircle(
-                  value: Value(value: 31),
-                ),
-                ValueCircle(
-                  value: Value(value: 32),
+                  value: const Value(value: 24),
                 ),
               ],
             ),
@@ -161,28 +134,26 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ValueCircle(
-                  value: Value(value: 33),
+                  value: const Value(value: 25),
+                ),
+                const OrangeCircle(),
+                ValueCircle(
+                  value: const Value(value: 27),
                 ),
                 ValueCircle(
-                  value: Value(value: 34),
+                  value: const Value(value: 28),
                 ),
                 ValueCircle(
-                  value: Value(value: 35),
+                  value: const Value(value: 29),
                 ),
                 ValueCircle(
-                  value: Value(value: 36),
+                  value: const Value(value: 30),
                 ),
                 ValueCircle(
-                  value: Value(value: 37),
+                  value: const Value(value: 31),
                 ),
                 ValueCircle(
-                  value: Value(value: 38),
-                ),
-                ValueCircle(
-                  value: Value(value: 39),
-                ),
-                ValueCircle(
-                  value: Value(value: 40),
+                  value: const Value(value: 32),
                 ),
               ],
             ),
@@ -190,28 +161,28 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ValueCircle(
-                  value: Value(value: 41),
+                  value: const Value(value: 33),
                 ),
                 ValueCircle(
-                  value: Value(value: 42),
+                  value: const Value(value: 34),
                 ),
                 ValueCircle(
-                  value: Value(value: 43),
+                  value: const Value(value: 35),
                 ),
                 ValueCircle(
-                  value: Value(value: 44),
+                  value: const Value(value: 36),
                 ),
                 ValueCircle(
-                  value: Value(value: 45),
+                  value: const Value(value: 37),
                 ),
                 ValueCircle(
-                  value: Value(value: 46),
+                  value: const Value(value: 38),
                 ),
                 ValueCircle(
-                  value: Value(value: 47),
+                  value: const Value(value: 39),
                 ),
                 ValueCircle(
-                  value: Value(value: 48),
+                  value: const Value(value: 40),
                 ),
               ],
             ),
@@ -219,28 +190,28 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ValueCircle(
-                  value: Value(value: 49),
+                  value: const Value(value: 41),
                 ),
                 ValueCircle(
-                  value: Value(value: 50),
+                  value: const Value(value: 42),
                 ),
                 ValueCircle(
-                  value: Value(value: 51),
+                  value: const Value(value: 43),
                 ),
                 ValueCircle(
-                  value: Value(value: 52),
+                  value: const Value(value: 44),
                 ),
                 ValueCircle(
-                  value: Value(value: 53),
+                  value: const Value(value: 45),
                 ),
                 ValueCircle(
-                  value: Value(value: 54),
+                  value: const Value(value: 46),
                 ),
                 ValueCircle(
-                  value: Value(value: 55),
+                  value: const Value(value: 47),
                 ),
                 ValueCircle(
-                  value: Value(value: 56),
+                  value: const Value(value: 48),
                 ),
               ],
             ),
@@ -248,27 +219,56 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ValueCircle(
-                  value: Value(value: 57),
+                  value: const Value(value: 49),
                 ),
                 ValueCircle(
-                  value: Value(value: 58),
+                  value: const Value(value: 50),
                 ),
                 ValueCircle(
-                  value: Value(value: 59),
+                  value: const Value(value: 51),
                 ),
                 ValueCircle(
-                  value: Value(value: 60),
+                  value: const Value(value: 52),
                 ),
                 ValueCircle(
-                  value: Value(value: 61),
+                  value: const Value(value: 53),
                 ),
                 ValueCircle(
-                  value: Value(value: 62),
+                  value: const Value(value: 54),
                 ),
                 ValueCircle(
-                  value: Value(value: 63),
+                  value: const Value(value: 55),
                 ),
-                BlueCircle()
+                ValueCircle(
+                  value: const Value(value: 56),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ValueCircle(
+                  value: const Value(value: 57),
+                ),
+                ValueCircle(
+                  value: const Value(value: 58),
+                ),
+                ValueCircle(
+                  value: const Value(value: 59),
+                ),
+                ValueCircle(
+                  value: const Value(value: 60),
+                ),
+                ValueCircle(
+                  value: const Value(value: 61),
+                ),
+                ValueCircle(
+                  value: const Value(value: 62),
+                ),
+                ValueCircle(
+                  value: const Value(value: 63),
+                ),
+                const BlueCircle()
               ],
             ),
             Row(
@@ -297,12 +297,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 )
               ],
             ),
+            const SizedBox(height: 0),
             ElevatedButton(
                 style: mainButton,
                 onPressed: () {
                   Navigator.pop(context);
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return CashierView();
+                    return const CashierView();
                   }));
                 },
                 child: const Text("Punch Card")),
