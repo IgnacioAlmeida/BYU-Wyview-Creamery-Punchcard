@@ -94,8 +94,8 @@ class ValueCircle extends StatelessWidget {
 }
 
 final ButtonStyle mainButton = ElevatedButton.styleFrom(
-  primary: COLOR_LIGHT_BLUE,
-  onPrimary: COLOR_WHITE,
+  foregroundColor: COLOR_WHITE,
+  backgroundColor: COLOR_LIGHT_BLUE,
   padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 15),
   textStyle: const TextStyle(fontSize: 15),
 );
