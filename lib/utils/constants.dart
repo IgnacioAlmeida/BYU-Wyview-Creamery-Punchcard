@@ -69,11 +69,11 @@ class Value {
 }
 
 class ValueCircle extends StatefulWidget {
-  ValueCircle({
-    required this.value,
-  }) : super(key: ObjectKey(value));
+  ValueCircle({required this.value, required this.totalAmountSpent})
+      : super(key: ObjectKey(value));
 
   final Value value;
+  final int totalAmountSpent;
 
   @override
   State<ValueCircle> createState() => _ValueCircleState();
@@ -94,8 +94,13 @@ class _ValueCircleState extends State<ValueCircle> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          // Text("\$${widget.value.value}"),
-          Icon(Icons.star, color: Colors.yellow.shade600),
+          widget.value.value == widget.totalAmountSpent
+              ? Icon(
+                  Icons.star,
+                  color: Colors.yellow.shade600,
+                  size: 35,
+                )
+              : Text("\$${widget.value.value}"),
         ],
       ),
     );
