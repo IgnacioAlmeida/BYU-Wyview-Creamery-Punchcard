@@ -9,6 +9,8 @@ const COLOR_LIGHT_BLUE = Color.fromRGBO(64, 128, 200, 1.0);
 const double CIRCLE_WIDTH = 40.0;
 const double CIRCLE_HEIGHT = 40.0;
 
+const IconData ICON_STAR = IconData(0xe5f9, fontFamily: 'MaterialIcons');
+
 class PinkCircle extends StatelessWidget {
   const PinkCircle({super.key});
 
@@ -66,12 +68,18 @@ class Value {
   final int value;
 }
 
-class ValueCircle extends StatelessWidget {
+class ValueCircle extends StatefulWidget {
   ValueCircle({
     required this.value,
   }) : super(key: ObjectKey(value));
 
   final Value value;
+
+  @override
+  State<ValueCircle> createState() => _ValueCircleState();
+}
+
+class _ValueCircleState extends State<ValueCircle> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -86,7 +94,8 @@ class ValueCircle extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text("\$${value.value}"),
+          // Text("\$${widget.value.value}"),
+          Icon(Icons.star, color: Colors.yellow.shade600),
         ],
       ),
     );

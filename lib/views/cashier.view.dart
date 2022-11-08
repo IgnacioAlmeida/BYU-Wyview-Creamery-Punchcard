@@ -33,7 +33,7 @@ class CashierView extends StatelessWidget {
                 hintText: 'Enter Access Code',
               ),
             ),
-            const SizedBox(height: 20),
+            // const SizedBox(height: 20),
             Align(
               alignment: Alignment.bottomRight,
               child: ElevatedButton(

@@ -1,10 +1,38 @@
 import 'package:creamery/views/homepage.view.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../utils/constants.dart';
 
-class AmountSpentView extends StatelessWidget {
+class AmountSpentView extends StatefulWidget {
   const AmountSpentView({super.key});
+
+  @override
+  State<AmountSpentView> createState() => _AmountSpentViewState();
+}
+
+class _AmountSpentViewState extends State<AmountSpentView> {
+  TextEditingController amountSpent = TextEditingController();
+  int _currentAmountSpent = 0;
+  int _currentTotalSpentDebug = 0;
+
+  Future<int> _getTotalAmountSpent() async {
+    final prefs = await SharedPreferences.getInstance();
+    final totalAmountSpent = prefs.getInt('totalAmountSpent');
+    if (totalAmountSpent == null) {
+      return 0;
+    }
+    return totalAmountSpent;
+  }
+
+  Future<void> _setTotalAmountSpent() async {
+    final prefs = await SharedPreferences.getInstance();
+    _currentAmountSpent = int.parse(amountSpent.text);
+    int _lastTotalAmountSpent = await _getTotalAmountSpent();
+    int totalSpent = _currentAmountSpent + _lastTotalAmountSpent;
+    await prefs.setInt('totalAmountSpent', totalSpent);
+    _currentTotalSpentDebug = totalSpent;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +54,14 @@ class AmountSpentView extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 50),
-            const TextField(
-              decoration: InputDecoration(
+            TextField(
+              controller: amountSpent,
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: '\$',
                 hintText: 'Total Amount Spent',
               ),
             ),
-            const SizedBox(height: 20),
             Align(
               alignment: Alignment.bottomRight,
               child: ElevatedButton(
@@ -46,6 +74,9 @@ class AmountSpentView extends StatelessWidget {
                   ),
                   onPressed: () {
                     Navigator.pop(context);
+                    _setTotalAmountSpent();
+                    print("total amount spent: ${_currentTotalSpentDebug}\n");
+
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
                       return const MyHomePage();
@@ -53,7 +84,7 @@ class AmountSpentView extends StatelessWidget {
                   },
                   child: const Text("Punch!")),
             ),
-            Spacer()
+            const Spacer()
           ],
         ),
       ),

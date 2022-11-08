@@ -1,36 +1,35 @@
 import 'package:creamery/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'cashier.view.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  int _currentTotalAmountSpent = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  @override
+  void initState() {
+    super.initState();
+    _setTotalAmountSpent();
+  }
+
+  Future<void> _setTotalAmountSpent() async {
+    final prefs = await SharedPreferences.getInstance();
+    int? totalAmountSpent = prefs.getInt('totalAmountSpent');
+    totalAmountSpent ??= 0;
+    setState(() => _currentTotalAmountSpent = totalAmountSpent!);
+  }
+
+  Future<void> _resetTotalAmount() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('totalAmountSpent', 0);
   }
 
   @override
@@ -45,6 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 140,
               width: 140,
             ),
+            Text("current total amount spent: ${_currentTotalAmountSpent}"),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -307,6 +307,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   }));
                 },
                 child: const Text("Punch Card")),
+            ElevatedButton(
+                style: mainButton,
+                onPressed: () {
+                  _resetTotalAmount();
+                },
+                child: const Text("Reset total amount")),
           ],
         ),
       ),

@@ -1,93 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class Product {
-  const Product({required this.name});
+void main() => runApp(const MyApp());
 
-  final String name;
-}
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-typedef CartChangedCallback = Function(Product product, bool inCart);
-
-class ShoppingListItem extends StatelessWidget {
-  ShoppingListItem({
-    required this.product,
-    required this.inCart,
-    required this.onCartChanged,
-  }) : super(key: ObjectKey(product));
-
-  final Product product;
-  final bool inCart;
-  final CartChangedCallback onCartChanged;
-
-  Color _getColor(BuildContext context) {
-    // The theme depends on the BuildContext because different
-    // parts of the tree can have different themes.
-    // The BuildContext indicates where the build is
-    // taking place and therefore which theme to use.
-
-    return inCart //
-        ? Colors.black54
-        : Theme.of(context).primaryColor;
-  }
-
-  TextStyle? _getTextStyle(BuildContext context) {
-    if (!inCart) return null;
-
-    return const TextStyle(
-      color: Colors.black54,
-      decoration: TextDecoration.lineThrough,
-    );
-  }
-
+  // This widget is the root of the application.
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      onTap: () {
-        onCartChanged(product, inCart);
-      },
-      leading: CircleAvatar(
-        backgroundColor: _getColor(context),
-        child: Text(product.name[0]),
-      ),
-      title: Text(
-        product.name,
-        style: _getTextStyle(context),
-      ),
+    return const MaterialApp(
+      title: 'Shared preferences demo',
+      home: MyHomePage(title: 'Shared preferences demo'),
     );
   }
 }
 
-class ShoppingList extends StatefulWidget {
-  const ShoppingList({required this.products, super.key});
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
 
-  final List<Product> products;
-
-  // The framework calls createState the first time
-  // a widget appears at a given location in the tree.
-  // If the parent rebuilds and uses the same type of
-  // widget (with the same key), the framework re-uses
-  // the State object instead of creating a new State object.
+  final String title;
 
   @override
-  State<ShoppingList> createState() => _ShoppingListState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _ShoppingListState extends State<ShoppingList> {
-  final _shoppingCart = <Product>{};
+class _MyHomePageState extends State<MyHomePage> {
+  int _counter = 0;
 
-  void _handleCartChanged(Product product, bool inCart) {
+  @override
+  void initState() {
+    super.initState();
+    _loadCounter();
+  }
+
+  //Loading counter value on start
+  Future<void> _loadCounter() async {
+    final prefs = await SharedPreferences.getInstance();
     setState(() {
-      // When a user changes what's in the cart, you need
-      // to change _shoppingCart inside a setState call to
-      // trigger a rebuild.
-      // The framework then calls build, below,
-      // which updates the visual appearance of the app.
+      _counter = (prefs.getInt('counter') ?? 0);
+    });
+  }
 
-      if (!inCart) {
-        _shoppingCart.add(product);
-      } else {
-        _shoppingCart.remove(product);
-      }
+  //Incrementing counter after click
+  Future<void> _incrementCounter() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _counter = (prefs.getInt('counter') ?? 0) + 1;
+      prefs.setInt('counter', _counter);
     });
   }
 
@@ -95,31 +55,27 @@ class _ShoppingListState extends State<ShoppingList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Shopping List'),
+        title: Text(widget.title),
       ),
-      body: ListView(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
-        children: widget.products.map((product) {
-          return ShoppingListItem(
-            product: product,
-            inCart: _shoppingCart.contains(product),
-            onCartChanged: _handleCartChanged,
-          );
-        }).toList(),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'You have pushed the button this many times:',
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headline4,
+            ),
+          ],
+        ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
-}
-
-void main() {
-  runApp(const MaterialApp(
-    title: 'Shopping App',
-    home: ShoppingList(
-      products: [
-        Product(name: 'Eggs'),
-        Product(name: 'Flour'),
-        Product(name: 'Chocolate chips'),
-      ],
-    ),
-  ));
 }
