@@ -1,5 +1,6 @@
 import 'package:creamery/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile_scanner/mobile_scanner.dart';
 
 import 'amountSpent.view.dart';
 
@@ -13,47 +14,45 @@ class CashierView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(height: 50),
-            Image.asset(
-              'assets/creamery_logo.svg.png',
-              height: 140,
-              width: 140,
-            ),
-            const SizedBox(height: 50),
-            const Text(
-              "Let the cashier enter the access code",
-              style: TextStyle(fontSize: 35),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 50),
-            const TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Access Code',
-                hintText: 'Enter Access Code',
+            Flexible(
+              flex: 1,
+              child: Image.asset(
+                'assets/creamery_logo.svg.png',
+                height: 140,
+                width: 140,
               ),
             ),
-            // const SizedBox(height: 20),
-            Align(
-              alignment: Alignment.bottomRight,
-              child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: COLOR_WHITE,
-                    backgroundColor: COLOR_LIGHT_BLUE,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 50, vertical: 15),
-                    textStyle: const TextStyle(fontSize: 15),
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return const AmountSpentView();
-                    }));
-                  },
-                  child: const Text("Next")),
+            const SizedBox(height: 30),
+            const Flexible(
+              flex: 1,
+              child: Text(
+                "Scan the cashier's QR Code",
+                style: TextStyle(fontSize: 30),
+                textAlign: TextAlign.center,
+              ),
             ),
-            Spacer()
+            const SizedBox(height: 10),
+
+            Flexible(
+              flex: 3,
+              child: MobileScanner(
+                  allowDuplicates: false,
+                  onDetect: (barcode, args) {
+                    if (barcode.rawValue == null) {
+                      debugPrint('Failed to scan Barcode');
+                    } else {
+                      final String code = barcode.rawValue!;
+                      // if(code == "1234") {
+
+                      // }
+                      debugPrint('Barcode found! $code');
+                    }
+                  }),
+            ),
+
+            // const SizedBox(height: 50),
+
+            // const SizedBox(height: 50),
           ],
         ),
       ),
