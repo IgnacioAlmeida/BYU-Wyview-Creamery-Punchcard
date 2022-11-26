@@ -5,8 +5,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/constants.dart';
 
 class AmountSpentView extends StatefulWidget {
-  const AmountSpentView({super.key});
-
+  final Function() screenClosed;
+  const AmountSpentView({Key? key, required this.screenClosed})
+      : super(key: key);
   @override
   State<AmountSpentView> createState() => _AmountSpentViewState();
 }
@@ -73,10 +74,9 @@ class _AmountSpentViewState extends State<AmountSpentView> {
                     textStyle: const TextStyle(fontSize: 15),
                   ),
                   onPressed: () {
+                    widget.screenClosed();
                     Navigator.pop(context);
                     _setTotalAmountSpent();
-                    print("total amount spent: ${_currentTotalSpentDebug}\n");
-
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
                       return const MyHomePage();
