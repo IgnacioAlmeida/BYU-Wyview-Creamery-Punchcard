@@ -64,7 +64,6 @@ class BlueCircle extends StatelessWidget {
 
 class Value {
   const Value({required this.value});
-
   final int value;
 }
 
@@ -73,7 +72,7 @@ class ValueCircle extends StatefulWidget {
       : super(key: ObjectKey(value));
 
   final Value value;
-  final int totalAmountSpent;
+  final List<String> totalAmountSpent;
 
   @override
   State<ValueCircle> createState() => _ValueCircleState();
@@ -89,12 +88,19 @@ class _ValueCircleState extends State<ValueCircle> {
       decoration: BoxDecoration(
         border: Border.all(color: COLOR_LIGHT_BLUE, width: 1.0),
         shape: BoxShape.circle,
+        color: widget.value.value == 16
+            ? COLOR_PINK
+            : widget.value.value == 26
+                ? COLOR_ORGANE
+                : widget.value.value == 64
+                    ? COLOR_BLUE
+                    : Colors.transparent,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          widget.value.value == widget.totalAmountSpent
+          widget.totalAmountSpent.contains(widget.value.value.toString())
               ? Icon(
                   Icons.star,
                   color: Colors.yellow.shade600,
@@ -110,6 +116,13 @@ class _ValueCircleState extends State<ValueCircle> {
 final ButtonStyle mainButton = ElevatedButton.styleFrom(
   foregroundColor: COLOR_WHITE,
   backgroundColor: COLOR_LIGHT_BLUE,
+  padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 15),
+  textStyle: const TextStyle(fontSize: 15),
+);
+
+final ButtonStyle secondaryButton = ElevatedButton.styleFrom(
+  foregroundColor: Colors.white,
+  backgroundColor: Colors.transparent,
   padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 15),
   textStyle: const TextStyle(fontSize: 15),
 );

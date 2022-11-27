@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 import 'amountSpent.view.dart';
+import 'homepage.view.dart';
 
 class CashierView extends StatefulWidget {
   const CashierView({super.key});
@@ -19,6 +20,15 @@ class _CashierViewState extends State<CashierView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          // preferredSize: Size.fromHeight(30.0), // here the desired height
+          backgroundColor: COLOR_BLUE,
+          leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () =>
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return const MyHomePage();
+                  })))),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -31,7 +41,7 @@ class _CashierViewState extends State<CashierView> {
                 width: 140,
               ),
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 15),
             const Flexible(
               flex: 1,
               child: Text(
@@ -66,6 +76,19 @@ class _CashierViewState extends State<CashierView> {
                     }
                   }),
             ),
+            const SizedBox(height: 5),
+            Flexible(
+              child: ElevatedButton(
+                  style: mainButton,
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return AmountSpentView(screenClosed: _screenWasClosed);
+                    }));
+                  },
+                  child: const Text("Next")),
+            )
           ],
         ),
       ),
