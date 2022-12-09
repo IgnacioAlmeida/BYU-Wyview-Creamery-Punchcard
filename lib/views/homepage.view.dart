@@ -46,6 +46,44 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {});
   }
 
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Are you sure you want to reset your punchcard?'),
+          content: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                Text(
+                    'This action will erase all your progress in the punchcard program'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Confirm'),
+              onPressed: () {
+                _resetTotalAmount();
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const MyHomePage();
+                }));
+              },
+            ),
+            TextButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -393,11 +431,12 @@ class _MyHomePageState extends State<MyHomePage> {
             ElevatedButton(
                 style: secondaryButton,
                 onPressed: () {
-                  _resetTotalAmount();
-                  Navigator.pop(context);
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return const MyHomePage();
-                  }));
+                  _showMyDialog();
+                  // _resetTotalAmount();
+                  // Navigator.pop(context);
+                  // Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  //   return const MyHomePage();
+                  // }));
                 },
                 child: const Text("Reset Card")),
           ],
