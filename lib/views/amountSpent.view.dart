@@ -17,6 +17,9 @@ class _AmountSpentViewState extends State<AmountSpentView> {
   TextEditingController amountSpent = TextEditingController();
   int _currentAmountSpent = 0;
   int _currentTotalSpentDebug = 0;
+  bool wonFirstReward = false;
+  bool wonSecondReward = false;
+  bool wonThirdReward = false;
 
   Future<List<String>> _getTotalAmountSpent() async {
     final prefs = await SharedPreferences.getInstance();
@@ -34,9 +37,20 @@ class _AmountSpentViewState extends State<AmountSpentView> {
     _currentAmountSpent = int.parse(amountSpent.text);
     List<String> allPunchesDone = await _getTotalAmountSpent();
     int allPunchesDoneSize = allPunchesDone.length;
-    int totalSpent =
-        _currentAmountSpent + int.parse(allPunchesDone[allPunchesDoneSize - 1]);
-    if (totalSpent > 64) totalSpent = 64;
+    int previousPunchDone = int.parse(allPunchesDone[allPunchesDoneSize - 1]);
+    int totalSpent = _currentAmountSpent + previousPunchDone;
+    if (totalSpent >= 16 && totalSpent < 26 && previousPunchDone < 16) {
+      wonFirstReward = true;
+    }
+    if (totalSpent >= 26 && totalSpent < 64 && previousPunchDone < 26) {
+      wonSecondReward = true;
+    }
+    if (totalSpent > 64) {
+      totalSpent = 64;
+      if (previousPunchDone < 64) {
+        wonThirdReward = true;
+      }
+    }
     allPunchesDone.add(totalSpent.toString());
     await prefs.setStringList('totalAmountSpent', allPunchesDone);
     _currentTotalSpentDebug = totalSpent;
@@ -96,6 +110,63 @@ class _AmountSpentViewState extends State<AmountSpentView> {
                     _setTotalAmountSpent();
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
+                      if (wonFirstReward) {
+                        wonFirstReward = false;
+                        return AlertDialog(
+                          title: const Text(
+                              'Congratulations! You just earned a Child Cone!'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MyHomePage()),
+                                );
+                              },
+                              child: const Text('Nice!'),
+                            ),
+                          ],
+                        );
+                      }
+                      if (wonSecondReward) {
+                        wonSecondReward = false;
+                        return AlertDialog(
+                          title: const Text(
+                              'Congratulations! You just earned Half a Gallon of Milk!'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MyHomePage()),
+                                );
+                              },
+                              child: const Text('Nice!'),
+                            ),
+                          ],
+                        );
+                      }
+                      if (wonThirdReward) {
+                        wonThirdReward = false;
+                        return AlertDialog(
+                          title: const Text(
+                              'Congratulations! You just earned a Single Cone!'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MyHomePage()),
+                                );
+                              },
+                              child: const Text('Nice!'),
+                            ),
+                          ],
+                        );
+                      }
                       return const MyHomePage();
                     }));
                   },
